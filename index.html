@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quant Mastery — Quant Training Platform</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- ═══════════════════════════ SIDEBAR ═══════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-header">
+      <div class="brand" onclick="showView('home')" style="cursor:pointer">
+        <span class="brand-icon">⚡</span>
+        <div>
+          <div class="brand-name">QUANT MASTERY</div>
+          <div class="brand-sub">Quant Training Platform</div>
+        </div>
+      </div>
+      <button class="dark-toggle" id="dark-toggle" onclick="toggleDarkMode()" title="Toggle light/dark mode">☀</button>
+    </div>
+
+    <!-- Search -->
+    <div class="sidebar-search" onclick="openSearch()">
+      <span class="search-icon">⌕</span>
+      <span class="search-placeholder">Search days, concepts…</span>
+      <span class="search-kbd" id="search-kbd">⌘K</span>
+    </div>
+
+    <!-- Track Selector -->
+    <div class="track-selector">
+      <div class="track-label">LEARNING TRACK</div>
+      <div class="track-btns">
+        <button class="track-btn active" data-track="30" onclick="setTrack(30)">
+          <span class="track-days">30</span>
+          <span class="track-name">Sprint</span>
+        </button>
+        <button class="track-btn" data-track="90" onclick="setTrack(90)">
+          <span class="track-days">90</span>
+          <span class="track-name">Foundation</span>
+        </button>
+        <button class="track-btn" data-track="180" onclick="setTrack(180)">
+          <span class="track-days">180</span>
+          <span class="track-name">Mastery</span>
+        </button>
+        <button class="track-btn" data-track="210" onclick="setTrack(210)">
+          <span class="track-days">210</span>
+          <span class="track-name">Hull+</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="sidebar-progress">
+      <div class="progress-row">
+        <span id="progress-text">0 / 30 days</span>
+        <span id="streak-text">🔥 0 streak</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Module Nav -->
+    <nav class="module-nav" id="module-nav"></nav>
+
+    <!-- Quick Links -->
+    <div class="sidebar-links">
+      <a href="#" class="sidebar-link" onclick="showView('home');return false">🏠 Home</a>
+      <a href="#" class="sidebar-link" onclick="showView('essentials');return false">🎯 Essentials</a>
+      <a href="#" class="sidebar-link" onclick="showView('resources');return false">📚 Resources</a>
+      <a href="#" class="sidebar-link" onclick="showView('programs');return false">💻 Programs</a>
+      <a href="#" class="sidebar-link" onclick="showView('journal');return false">📓 Trade Journal</a>
+      <a href="#" class="sidebar-link" onclick="showView('progress');return false">📊 Progress</a>
+    </div>
+
+  </aside>
+
+  <!-- ═══════════════════════════ MAIN ═══════════════════════════ -->
+  <main class="main-content" id="main-content">
+
+    <!-- ── HOME ── -->
+    <div id="view-home" class="view active">
+      <div class="home-hero">
+        <div class="hero-eyebrow">Villanova School of Business × Kellogg School of Management</div>
+        <h1 class="hero-title">Quant Training Platform</h1>
+        <p class="hero-sub">Three tracks. Six modules. One goal: trade volatility like an institutional quant.</p>
+        <div class="hero-stats">
+          <div class="hstat"><div class="hstat-num" id="home-pct">0%</div><div class="hstat-lbl">Complete</div></div>
+          <div class="hstat"><div class="hstat-num" id="home-streak">0</div><div class="hstat-lbl">Day Streak</div></div>
+          <div class="hstat"><div class="hstat-num" id="home-days">30</div><div class="hstat-lbl">Track Days</div></div>
+        </div>
+      </div>
+
+      <!-- Track Cards -->
+      <div class="section-title">Choose Your Track</div>
+      <div class="track-cards">
+        <div class="track-card" onclick="setTrack(30);showView('lesson');loadDay(1)">
+          <div class="tc-head t30">
+            <div class="tc-num">30</div><div class="tc-label">Day Sprint</div>
+          </div>
+          <div class="tc-body">
+            <p>Core quant fundamentals to start trading options volatility. Probability, Black-Scholes, Greeks, IV vs RV edge detection.</p>
+            <ul>
+              <li>6 modules · 5 days each</li>
+              <li>Expected Value → Vol Trading</li>
+              <li>Jane Street problem every day</li>
+              <li>Build Programs 1–3 alongside</li>
+            </ul>
+          </div>
+          <div class="tc-foot">Start Sprint →</div>
+        </div>
+
+        <div class="track-card" onclick="setTrack(90);showView('lesson');loadDay(1)">
+          <div class="tc-head t90">
+            <div class="tc-num">90</div><div class="tc-label">Day Foundation</div>
+          </div>
+          <div class="tc-body">
+            <p>Full math stack + complete trading systems. Covers every level of the quant roadmap: Probability → Stochastic Calculus.</p>
+            <ul>
+              <li>6 modules · 15 days each</li>
+              <li>PCA, GARCH, Itô's lemma</li>
+              <li>Linear algebra in portfolio math</li>
+              <li>Build Programs 1–5 alongside</li>
+            </ul>
+          </div>
+          <div class="tc-foot">Start Foundation →</div>
+        </div>
+
+        <div class="track-card" onclick="setTrack(180);showView('lesson');loadDay(1)">
+          <div class="tc-head t180">
+            <div class="tc-num">180</div><div class="tc-label">Day Mastery</div>
+          </div>
+          <div class="tc-body">
+            <p>Complete transformation to institutional quant trader. Everything in Foundation + live IBKR, career track, Jane Street prep.</p>
+            <ul>
+              <li>6 modules · 30 days each</li>
+              <li>Live IBKR API integration</li>
+              <li>Full alpha research pipeline</li>
+              <li>Jane Street interview mastery</li>
+            </ul>
+          </div>
+          <div class="tc-foot">Start Mastery →</div>
+        </div>
+        <div class="track-card" onclick="setTrack(210);showView('lesson');loadDay(181)">
+          <div class="tc-head t180" style="background:linear-gradient(135deg, var(--accent), #ff6b35)">
+            <div class="tc-num">210</div><div class="tc-label">Day Hull+</div>
+          </div>
+          <div class="tc-body">
+            <p>Fill every Hull textbook gap. Futures, swaps, credit derivatives, XVAs, energy, real options, and derivatives mishaps.</p>
+            <ul>
+              <li>7 modules · Mastery + Hull bonus</li>
+              <li>Futures pricing &amp; hedging</li>
+              <li>CDS, CDOs &amp; credit risk</li>
+              <li>Derivatives disaster case studies</li>
+            </ul>
+          </div>
+          <div class="tc-foot">Start Hull+ →</div>
+        </div>
+      </div>
+
+      <!-- Module Overview -->
+      <div class="section-title" style="margin-top:3rem">The Modules</div>
+      <div class="module-overview-grid" id="module-overview-grid"></div>
+    </div>
+
+    <!-- ── LESSON ── -->
+    <div id="view-lesson" class="view">
+      <div class="lesson-topbar">
+        <button class="back-btn" onclick="showView('home')">← Back</button>
+        <div class="lesson-breadcrumb" id="lesson-breadcrumb">Module — Day</div>
+        <button class="complete-btn" id="complete-btn" onclick="toggleComplete()">✓ Mark Complete</button>
+      </div>
+
+      <div class="lesson-container">
+        <div class="lesson-header">
+          <div id="lesson-mod-badge" class="mod-badge"></div>
+          <h1 id="lesson-title" class="lesson-title"></h1>
+          <div id="lesson-meta" class="lesson-meta"></div>
+        </div>
+
+        <div class="lesson-section">
+          <div class="section-lbl">Core Concept</div>
+          <div id="concept-content" class="prose"></div>
+        </div>
+
+        <div id="poker-bridge" class="callout-poker"></div>
+
+        <div id="formula-box" class="formula-box"></div>
+
+        <div class="lesson-section">
+          <div class="section-lbl">Trading Example</div>
+          <div id="example-content" class="prose"></div>
+        </div>
+
+        <div class="lesson-section">
+          <div class="section-lbl">Today's Problems</div>
+          <div id="problems-container"></div>
+        </div>
+
+        <div class="lesson-section">
+          <div class="section-lbl">Resources</div>
+          <div id="resources-container" class="resources-grid"></div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="nav-btn" id="prev-btn" onclick="navigateDay(-1)">← Prev</button>
+          <div class="day-pill" id="day-pill">Day 1 of 30</div>
+          <button class="nav-btn primary" id="next-btn" onclick="navigateDay(1)">Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RESOURCES ── -->
+    <div id="view-resources" class="view">
+      <div class="page-header">
+        <h1>Resource Library</h1>
+        <p>Every free resource you need — books, courses, videos, data tools</p>
+      </div>
+      <div id="resources-page-content"></div>
+    </div>
+
+    <!-- ── PROGRAMS ── -->
+    <div id="view-programs" class="view">
+      <div class="page-header">
+        <h1>Trading Programs</h1>
+        <p>Google Colab notebooks — your actual edge-detection toolkit</p>
+      </div>
+      <div id="programs-page-content"></div>
+    </div>
+
+    <!-- ── JOURNAL ── -->
+    <div id="view-journal" class="view">
+      <div class="page-header">
+        <h1>Paper Trading Journal</h1>
+        <p>Log every trade with EV reasoning before you place it</p>
+      </div>
+
+      <div class="journal-form-card">
+        <h3>Log a Trade</h3>
+        <div class="jform">
+          <div class="jrow">
+            <div class="jfield"><label>Date</label><input type="date" id="j-date"></div>
+            <div class="jfield"><label>Ticker</label><input type="text" id="j-ticker" placeholder="SPY, BTC…"></div>
+            <div class="jfield"><label>Strategy</label>
+              <select id="j-strategy">
+                <option>Short Strangle</option><option>Short Straddle</option>
+                <option>Iron Condor</option><option>Long Straddle</option>
+                <option>Calendar Spread</option><option>Naked Put</option>
+                <option>Covered Call</option><option>Custom</option>
+              </select>
+            </div>
+          </div>
+          <div class="jrow">
+            <div class="jfield wide"><label>Trade Thesis (EV reasoning)</label>
+              <textarea id="j-thesis" placeholder="IV rank 75th pct, VRP positive, selling vol after earnings spike…"></textarea></div>
+          </div>
+          <div class="jrow">
+            <div class="jfield"><label>IV Rank (%)</label><input type="number" id="j-ivr" placeholder="75"></div>
+            <div class="jfield"><label>Entry ($)</label><input type="number" id="j-entry" step="0.01" placeholder="2.50"></div>
+            <div class="jfield"><label>Exit ($)</label><input type="number" id="j-exit" step="0.01" placeholder="0.50"></div>
+            <div class="jfield"><label>Contracts</label><input type="number" id="j-qty" placeholder="1"></div>
+          </div>
+          <div class="jrow">
+            <div class="jfield wide"><label>Lesson Learned</label>
+              <textarea id="j-lesson" placeholder="What did this trade teach me?"></textarea></div>
+          </div>
+          <button class="submit-btn" onclick="addJournalEntry()">Log Trade</button>
+        </div>
+      </div>
+
+      <div class="journal-stats-row" id="journal-stats"></div>
+      <div class="journal-table-wrap">
+        <table class="journal-table">
+          <thead><tr>
+            <th>Date</th><th>Ticker</th><th>Strategy</th><th>IV Rank</th>
+            <th>Entry</th><th>Exit</th><th>P&L</th><th>Result</th><th>Lesson</th><th></th>
+          </tr></thead>
+          <tbody id="journal-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── ESSENTIALS ── -->
+    <div id="view-essentials" class="view">
+      <div class="page-header essentials-header">
+        <div class="ess-badge">80/20 RULE</div>
+        <h1>Quant Essentials</h1>
+        <p>80% of what you need to trade volatility, in 20% of the time. Your always-available cheat sheet.</p>
+      </div>
+      <div id="essentials-content" class="essentials-content"></div>
+    </div>
+
+    <!-- ── PROGRESS ── -->
+    <div id="view-progress" class="view">
+      <div class="page-header"><h1>Your Progress</h1></div>
+      <div class="progress-summary" id="progress-summary"></div>
+      <div class="day-grid" id="progress-grid"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ═══════════════════════════ SEARCH MODAL ═══════════════════════════ -->
+<div id="search-overlay" class="search-overlay" style="display:none" onclick="if(event.target===this)closeSearch()">
+  <div class="search-modal">
+    <div class="search-input-row">
+      <span class="search-modal-icon">⌕</span>
+      <input type="text" id="search-input" class="search-input" placeholder="Search days, concepts, formulas…" autocomplete="off" oninput="onSearchInput(this.value)">
+      <button class="search-close" onclick="closeSearch()">ESC</button>
+    </div>
+    <div class="search-results" id="search-results">
+      <div class="search-hint">Type to search across all days and concepts</div>
+    </div>
+    <div class="search-footer">
+      <span class="search-footer-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+      <span class="search-footer-hint"><kbd>↵</kbd> open</span>
+      <span class="search-footer-hint"><kbd>esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ QUIZ MODAL ═══════════════════════════ -->
+<div id="quiz-overlay" class="quiz-overlay" style="display:none" onclick="if(event.target===this)closeQuiz()">
+  <div class="quiz-modal">
+    <div class="quiz-header">
+      <div>
+        <div class="quiz-title">Knowledge Check</div>
+        <div class="quiz-subtitle" id="quiz-subtitle">Day 1 · Module 1</div>
+      </div>
+      <button class="quiz-close-btn" onclick="closeQuiz()">✕</button>
+    </div>
+    <div class="quiz-progress-bar">
+      <div class="quiz-progress-fill" id="quiz-progress-fill" style="width:0%"></div>
+    </div>
+    <div class="quiz-qnum" id="quiz-qnum">Question 1 of 2</div>
+    <div class="quiz-question" id="quiz-question"></div>
+    <button class="quiz-reveal-btn" id="quiz-reveal-btn" onclick="revealQuizAnswer()">Reveal Answer ↓</button>
+    <div class="quiz-answer-box" id="quiz-answer-box" style="display:none">
+      <div class="quiz-answer-label">Answer</div>
+      <div class="quiz-answer-content" id="quiz-answer-content"></div>
+      <div class="quiz-eval-row">
+        <button class="quiz-eval-btn quiz-got-it" onclick="quizEval(true)">✓ Got it</button>
+        <button class="quiz-eval-btn quiz-missed" onclick="quizEval(false)">✗ Need review</button>
+      </div>
+    </div>
+    <button class="quiz-skip" onclick="closeQuiz()">Skip for now</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ QUIZ RESULTS TOAST ═══════════════════════════ -->
+<div id="quiz-toast" class="quiz-toast" style="display:none"></div>
+
+<script src="assets/app.js?v=2" charset="utf-8"></script>
+</body>
+</html>
