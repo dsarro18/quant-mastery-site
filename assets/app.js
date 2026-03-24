@@ -12109,7 +12109,7 @@ function renderProgramsPage() {
     html += '<p>' + p.desc + '</p>';
     if (p.output) html += '<div class="program-output"><strong>Output:</strong> ' + p.output + '</div>';
     if (p.file) html += '<div class="program-meta"><span>' + p.file + '</span><span>' + p.lines + ' lines</span><span>Pairs with ' + p.pairs + '</span></div>';
-    if (p.file) html += '<a class="colab-btn" href="https://colab.research.google.com/github/dsarro18/quant-programs/blob/main/' + p.file + '" target="_blank">&#9654; Open in Colab</a>';
+    if (p.file) { var nbFile = 'notebooks/' + p.file.replace('.py', '.ipynb'); html += '<a class="colab-btn" href="https://colab.research.google.com/github/dsarro18/quant-programs/blob/main/' + nbFile + '" target="_blank">&#9654; Open in Colab</a>'; }
     html += '</div>';
   });
   html += '</div>';
