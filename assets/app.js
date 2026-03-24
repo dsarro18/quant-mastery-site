@@ -12091,10 +12091,14 @@ function renderProgramsPage() {
     { num:12, title:'IBKR Live Execution Bridge', status:'done', statusText:'COMPLETE',
       desc:'Connects to IBKR TWS/Gateway via ib_insync. Signal-to-order pipeline with risk checks (max position, daily loss, delta limit). Paper trade mode by default. Simulation mode for Colab demo. Real-time P&L monitoring. The capstone program.',
       output:'Order execution, risk engine, position monitoring, trade log',
-      file:'program12_ibkr_bridge.py', lines:834, pairs:'Days 151-180' }
+      file:'program12_ibkr_bridge.py', lines:834, pairs:'Days 151-180' },
+    { num:13, title:'Unified Trading Pipeline', status:'done', statusText:'COMPLETE',
+      desc:'End-to-end scan-to-signal pipeline chaining all programs. 8 steps: Market Scan (30 tickers) → Edge Scoring (IVR/VRP) → Earnings Filter → Vol Surface Analysis → Regime Check (VIX/yield curve) → Quick Backtest → Kelly Sizing → Trade Recommendations. The crown jewel.',
+      output:'Pipeline funnel, ranked candidates, trade recommendations with thesis, risk summary',
+      file:'program13_unified_pipeline.py', lines:1550, pairs:'Days 181-210' }
   ];
 
-  let html = '<div class="programs-summary"><div class="programs-stat"><div class="programs-stat-num">12/12</div><div class="programs-stat-lbl">Programs Built</div></div><div class="programs-stat"><div class="programs-stat-num">6,436</div><div class="programs-stat-lbl">Lines of Code</div></div><div class="programs-stat"><div class="programs-stat-num">100%</div><div class="programs-stat-lbl">Colab Ready</div></div></div>';
+  let html = '<div class="programs-summary"><div class="programs-stat"><div class="programs-stat-num">13/13</div><div class="programs-stat-lbl">Programs Built</div></div><div class="programs-stat"><div class="programs-stat-num">7,986</div><div class="programs-stat-lbl">Lines of Code</div></div><div class="programs-stat"><div class="programs-stat-num">100%</div><div class="programs-stat-lbl">Colab Ready</div></div></div>';
   html += '<p style="text-align:center;color:var(--muted);margin-bottom:2rem">All programs on <a href="https://github.com/dsarro18/quant-programs" target="_blank" style="color:var(--accent)">GitHub</a> — click Open in Colab to run instantly</p>';
   html += '<div class="programs-grid">';
   programs.forEach(p => {
